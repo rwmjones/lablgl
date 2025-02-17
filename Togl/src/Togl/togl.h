@@ -63,10 +63,6 @@
 #    define CONST84
 #  endif
 
-#  ifndef NULL
-#    define NULL 0
-#  endif
-
 #  ifndef TOGL_USE_FONTS
 #    define TOGL_USE_FONTS 1    /* needed for demos */
 #  endif
