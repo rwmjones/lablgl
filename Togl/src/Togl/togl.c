@@ -1339,7 +1339,7 @@ Togl_Widget(ClientData clientData, Tcl_Interp *interp, int argc,
         return TCL_ERROR;
     }
 
-    Tk_Preserve((ClientData) togl);
+    Tcl_Preserve((ClientData) togl);
 
     if (!strncmp(argv[1], "configure", MAX(1, strlen(argv[1])))) {
         if (argc == 2) {
@@ -1423,7 +1423,7 @@ Togl_Widget(ClientData clientData, Tcl_Interp *interp, int argc,
         }
     }
 
-    Tk_Release((ClientData) togl);
+    Tcl_Release((ClientData) togl);
     return result;
 }
 
@@ -1613,7 +1613,7 @@ Togl_Cmd(ClientData clientData, Tcl_Interp *interp, int argc,
 
     /* If defined, setup timer */
     if (togl->TimerProc) {
-        (void) Tk_CreateTimerHandler(togl->TimerInterval, Togl_Timer,
+        (void) Tcl_CreateTimerHandler(togl->TimerInterval, Togl_Timer,
                 (ClientData) togl);
     }
 
@@ -2525,12 +2525,12 @@ ToglCmdDeletedProc(ClientData clientData)
  */
 static void
 Togl_Destroy(
-#if (TK_MAJOR_VERSION * 100 + TK_MINOR_VERSION) >= 401
-        char *
+#if TCL_MAJOR_VERSION >= 9
+             void *
 #else
-        ClientData
+             char *
 #endif
-        clientData)
+             clientData)
 {
     Togl   *togl = (Togl *) clientData;
 
@@ -2685,7 +2685,7 @@ Togl_PostRedisplay(Togl *togl)
 {
     if (!togl->UpdatePending) {
         togl->UpdatePending = True;
-        Tk_DoWhenIdle(Togl_Render, (ClientData) togl);
+        Tcl_DoWhenIdle(Togl_Render, (ClientData) togl);
     }
 }
 
@@ -3288,7 +3288,7 @@ Togl_PostOverlayRedisplay(Togl *togl)
 {
     if (!togl->OverlayUpdatePending
             && togl->OverlayWindow && togl->OverlayDisplayProc) {
-        Tk_DoWhenIdle(RenderOverlay, (ClientData) togl);
+        Tcl_DoWhenIdle(RenderOverlay, (ClientData) togl);
         togl->OverlayUpdatePending = True;
     }
 }
