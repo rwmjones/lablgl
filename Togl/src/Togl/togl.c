@@ -1245,8 +1245,25 @@ Togl_Configure(Tcl_Interp *interp, Togl *togl,
     int     oldHeight = togl->Height;
     int     oldSetGrid = togl->SetGrid;
 
-    if (Tk_ConfigureWidget(interp, togl->TkWin, configSpecs,
-                    argc, argv, WIDGREC togl, flags) == TCL_ERROR) {
+    /* Convert argv array to Tcl_Obj, required in Tcl 9.0
+     * https://core.tcl-lang.org/tips/doc/main/tip/647.md
+     */
+    Tcl_Obj **objv = ckalloc(argc * sizeof (Tcl_Obj *));
+    size_t i;
+    for (i = 0; i < argc; ++i) {
+        objv[i] = Tcl_NewStringObj(argv[i], strlen(argv[i]));
+        Tcl_IncrRefCount(objv[i]);
+    }
+
+    int r;
+    r = Tk_ConfigureWidget(interp, togl->TkWin, configSpecs,
+                           argc, objv, WIDGREC togl,
+                           flags|TK_CONFIG_OBJS);
+    for (i = 0; i < argc; ++i) {
+        Tcl_DecrRefCount(objv[i]);
+    }
+    ckfree(objv);
+    if (r == TCL_ERROR) {
         return (TCL_ERROR);
     }
 #ifndef USE_OVERLAY
