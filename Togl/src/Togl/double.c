@@ -153,7 +153,7 @@ display_cb(Togl *togl)
 
 
 int
-setXrot_cb(Togl *togl, int argc, CONST84 char *argv[])
+setXrot_cb(Togl *togl, int argc, const char *argv[])
 {
     Tcl_Interp *interp = Togl_Interp(togl);
 
@@ -187,7 +187,7 @@ setXrot_cb(Togl *togl, int argc, CONST84 char *argv[])
 
 
 int
-setYrot_cb(Togl *togl, int argc, CONST84 char *argv[])
+setYrot_cb(Togl *togl, int argc, const char *argv[])
 {
     Tcl_Interp *interp = Togl_Interp(togl);
 

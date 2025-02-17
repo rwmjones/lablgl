@@ -59,10 +59,6 @@
 #    include <X11/extensions/SGIStereo.h>
 #  endif
 
-#  ifndef CONST84
-#    define CONST84
-#  endif
-
 #  ifndef TOGL_USE_FONTS
 #    define TOGL_USE_FONTS 1    /* needed for demos */
 #  endif
@@ -98,7 +94,7 @@ struct Togl;
 typedef struct Togl Togl;
 
 typedef void (Togl_Callback) (Togl *togl);
-typedef int (Togl_CmdProc) (Togl *togl, int argc, CONST84 char *argv[]);
+typedef int (Togl_CmdProc) (Togl *togl, int argc, const char *argv[]);
 
 TOGL_EXTERN int Togl_Init(Tcl_Interp *interp);
 

@@ -238,7 +238,7 @@ display_cb(Togl *togl)
  * Called when a magnification filter radio button is pressed.
  */
 int
-magfilter_cb(Togl *togl, int argc, CONST84 char *argv[])
+magfilter_cb(Togl *togl, int argc, const char *argv[])
 {
     Tcl_Interp *interp = Togl_Interp(togl);
 
@@ -262,7 +262,7 @@ magfilter_cb(Togl *togl, int argc, CONST84 char *argv[])
  * Called when a minification filter radio button is pressed.
  */
 int
-minfilter_cb(Togl *togl, int argc, CONST84 char *argv[])
+minfilter_cb(Togl *togl, int argc, const char *argv[])
 {
     Tcl_Interp *interp = Togl_Interp(togl);
 
@@ -291,7 +291,7 @@ minfilter_cb(Togl *togl, int argc, CONST84 char *argv[])
 
 
 int
-xrot_cb(Togl *togl, int argc, CONST84 char *argv[])
+xrot_cb(Togl *togl, int argc, const char *argv[])
 {
     Tcl_Interp *interp = Togl_Interp(togl);
 
@@ -314,7 +314,7 @@ xrot_cb(Togl *togl, int argc, CONST84 char *argv[])
 
 
 int
-yrot_cb(Togl *togl, int argc, CONST84 char *argv[])
+yrot_cb(Togl *togl, int argc, const char *argv[])
 {
     Tcl_Interp *interp = Togl_Interp(togl);
 
@@ -337,7 +337,7 @@ yrot_cb(Togl *togl, int argc, CONST84 char *argv[])
 
 
 int
-scale_cb(Togl *togl, int argc, CONST84 char *argv[])
+scale_cb(Togl *togl, int argc, const char *argv[])
 {
     Tcl_Interp *interp = Togl_Interp(togl);
 
@@ -363,7 +363,7 @@ scale_cb(Togl *togl, int argc, CONST84 char *argv[])
  * Called when S texture coordinate wrapping is changed.
  */
 int
-swrap_cb(Togl *togl, int argc, CONST84 char *argv[])
+swrap_cb(Togl *togl, int argc, const char *argv[])
 {
     Tcl_Interp *interp = Togl_Interp(togl);
 
@@ -397,7 +397,7 @@ swrap_cb(Togl *togl, int argc, CONST84 char *argv[])
  * Called when T texture coordinate wrapping is changed.
  */
 int
-twrap_cb(Togl *togl, int argc, CONST84 char *argv[])
+twrap_cb(Togl *togl, int argc, const char *argv[])
 {
     Tcl_Interp *interp = Togl_Interp(togl);
 
@@ -431,7 +431,7 @@ twrap_cb(Togl *togl, int argc, CONST84 char *argv[])
  * Called when the texture environment mode is changed.
  */
 int
-envmode_cb(Togl *togl, int argc, CONST84 char *argv[])
+envmode_cb(Togl *togl, int argc, const char *argv[])
 {
     Tcl_Interp *interp = Togl_Interp(togl);
 
@@ -467,7 +467,7 @@ envmode_cb(Togl *togl, int argc, CONST84 char *argv[])
  * Called when the polygon color is changed.
  */
 int
-polycolor_cb(Togl *togl, int argc, CONST84 char *argv[])
+polycolor_cb(Togl *togl, int argc, const char *argv[])
 {
     Tcl_Interp *interp = Togl_Interp(togl);
 
@@ -495,7 +495,7 @@ polycolor_cb(Togl *togl, int argc, CONST84 char *argv[])
  * Called when the texture image is to be changed
  */
 int
-image_cb(Togl *togl, int argc, CONST84 char *argv[])
+image_cb(Togl *togl, int argc, const char *argv[])
 {
     Tcl_Interp *interp = Togl_Interp(togl);
 
@@ -530,7 +530,7 @@ image_cb(Togl *togl, int argc, CONST84 char *argv[])
  * Called when the texture coordinate scale is changed.
  */
 int
-coord_scale_cb(Togl *togl, int argc, CONST84 char *argv[])
+coord_scale_cb(Togl *togl, int argc, const char *argv[])
 {
     Tcl_Interp *interp = Togl_Interp(togl);
     float   s;

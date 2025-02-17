@@ -97,10 +97,10 @@
 
 #if TK_MAJOR_VERSION > 8 || (TK_MAJOR_VERSION == 8 && TK_MINOR_VERSION >= 6)
 static void (*SetClassProcsPtr)
-        _ANSI_ARGS_((Tk_Window, const Tk_ClassProcs *, ClientData));
+        (Tk_Window, const Tk_ClassProcs *, ClientData);
 #else
 static void (*SetClassProcsPtr)
-        _ANSI_ARGS_((Tk_Window, Tk_ClassProcs *, ClientData));
+        (Tk_Window, Tk_ClassProcs *, ClientData);
 #endif
 #endif
 
@@ -109,11 +109,10 @@ static void (*SetClassProcsPtr)
  * (this is needed for Tcl ver =< 8.4a3)
  */
 
-typedef Window (TkClassCreateProc) _ANSI_ARGS_((Tk_Window tkwin,
-                Window parent, ClientData instanceData));
-typedef void (TkClassGeometryProc) _ANSI_ARGS_((ClientData instanceData));
-typedef void (TkClassModalProc) _ANSI_ARGS_((Tk_Window tkwin,
-                XEvent *eventPtr));
+typedef Window (TkClassCreateProc) (Tk_Window tkwin,
+                Window parent, ClientData instanceData);
+typedef void (TkClassGeometryProc) (ClientData instanceData);
+typedef void (TkClassModalProc) (Tk_Window tkwin, XEvent *eventPtr);
 typedef struct TkClassProcs
 {
     TkClassCreateProc *createProc;
@@ -288,7 +287,7 @@ struct Togl
  * Prototypes for functions local to this file
  */
 static int Togl_Cmd(ClientData clientData, Tcl_Interp *interp,
-        int argc, CONST84 char **argv);
+        int argc, const char **argv);
 static void Togl_EventProc(ClientData clientData, XEvent *eventPtr);
 static Window Togl_CreateWindow(Tk_Window, Window, ClientData);
 static void Togl_WorldChanged(ClientData);
@@ -319,104 +318,104 @@ static void SetMacBufRect(Togl *togl);
 
 static Tk_ConfigSpec configSpecs[] = {
     {TK_CONFIG_PIXELS, TCL_STUPID "-height", "height", "Height",
-            DEFAULT_HEIGHT, Tk_Offset(Togl, Height), 0, NULL},
+            DEFAULT_HEIGHT, offsetof(Togl, Height), 0, NULL},
 
     {TK_CONFIG_PIXELS, TCL_STUPID "-width", "width", "Width",
-            DEFAULT_WIDTH, Tk_Offset(Togl, Width), 0, NULL},
+            DEFAULT_WIDTH, offsetof(Togl, Width), 0, NULL},
 
     {TK_CONFIG_INT, TCL_STUPID "-setgrid", "setGrid", "SetGrid",
-            "0", Tk_Offset(Togl, SetGrid), 0},
+            "0", offsetof(Togl, SetGrid), 0},
 
     {TK_CONFIG_BOOLEAN, TCL_STUPID "-rgba", "rgba", "Rgba",
-            "true", Tk_Offset(Togl, RgbaFlag), 0, NULL},
+            "true", offsetof(Togl, RgbaFlag), 0, NULL},
 
     {TK_CONFIG_INT, TCL_STUPID "-redsize", "redsize", "RedSize",
-            "1", Tk_Offset(Togl, RgbaRed), 0, NULL},
+            "1", offsetof(Togl, RgbaRed), 0, NULL},
 
     {TK_CONFIG_INT, TCL_STUPID "-greensize", "greensize", "GreenSize",
-            "1", Tk_Offset(Togl, RgbaGreen), 0, NULL},
+            "1", offsetof(Togl, RgbaGreen), 0, NULL},
 
     {TK_CONFIG_INT, TCL_STUPID "-bluesize", "bluesize", "BlueSize",
-            "1", Tk_Offset(Togl, RgbaBlue), 0, NULL},
+            "1", offsetof(Togl, RgbaBlue), 0, NULL},
 
     {TK_CONFIG_BOOLEAN, TCL_STUPID "-double", "double", "Double",
-            "false", Tk_Offset(Togl, DoubleFlag), 0, NULL},
+            "false", offsetof(Togl, DoubleFlag), 0, NULL},
 
     {TK_CONFIG_BOOLEAN, TCL_STUPID "-depth", "depth", "Depth",
-            "false", Tk_Offset(Togl, DepthFlag), 0, NULL},
+            "false", offsetof(Togl, DepthFlag), 0, NULL},
 
     {TK_CONFIG_INT, TCL_STUPID "-depthsize", "depthsize", "DepthSize",
-            "1", Tk_Offset(Togl, DepthSize), 0, NULL},
+            "1", offsetof(Togl, DepthSize), 0, NULL},
 
     {TK_CONFIG_BOOLEAN, TCL_STUPID "-accum", "accum", "Accum",
-            "false", Tk_Offset(Togl, AccumFlag), 0, NULL},
+            "false", offsetof(Togl, AccumFlag), 0, NULL},
 
     {TK_CONFIG_INT, TCL_STUPID "-accumredsize", "accumredsize", "AccumRedSize",
-            "1", Tk_Offset(Togl, AccumRed), 0, NULL},
+            "1", offsetof(Togl, AccumRed), 0, NULL},
 
     {TK_CONFIG_INT, TCL_STUPID "-accumgreensize", "accumgreensize",
                 "AccumGreenSize",
-            "1", Tk_Offset(Togl, AccumGreen), 0, NULL},
+            "1", offsetof(Togl, AccumGreen), 0, NULL},
 
     {TK_CONFIG_INT, TCL_STUPID "-accumbluesize", "accumbluesize",
                 "AccumBlueSize",
-            "1", Tk_Offset(Togl, AccumBlue), 0, NULL},
+            "1", offsetof(Togl, AccumBlue), 0, NULL},
 
     {TK_CONFIG_INT, TCL_STUPID "-accumalphasize", "accumalphasize",
                 "AccumAlphaSize",
-            "1", Tk_Offset(Togl, AccumAlpha), 0, NULL},
+            "1", offsetof(Togl, AccumAlpha), 0, NULL},
 
     {TK_CONFIG_BOOLEAN, TCL_STUPID "-alpha", "alpha", "Alpha",
-            "false", Tk_Offset(Togl, AlphaFlag), 0, NULL},
+            "false", offsetof(Togl, AlphaFlag), 0, NULL},
 
     {TK_CONFIG_INT, TCL_STUPID "-alphasize", "alphasize", "AlphaSize",
-            "1", Tk_Offset(Togl, AlphaSize), 0, NULL},
+            "1", offsetof(Togl, AlphaSize), 0, NULL},
 
     {TK_CONFIG_BOOLEAN, TCL_STUPID "-stencil", "stencil", "Stencil",
-            "false", Tk_Offset(Togl, StencilFlag), 0, NULL},
+            "false", offsetof(Togl, StencilFlag), 0, NULL},
 
     {TK_CONFIG_INT, TCL_STUPID "-stencilsize", "stencilsize", "StencilSize",
-            "1", Tk_Offset(Togl, StencilSize), 0, NULL},
+            "1", offsetof(Togl, StencilSize), 0, NULL},
 
     {TK_CONFIG_INT, TCL_STUPID "-auxbuffers", "auxbuffers", "AuxBuffers",
-            "0", Tk_Offset(Togl, AuxNumber), 0, NULL},
+            "0", offsetof(Togl, AuxNumber), 0, NULL},
 
     {TK_CONFIG_BOOLEAN, TCL_STUPID "-privatecmap", "privateCmap", "PrivateCmap",
-            "false", Tk_Offset(Togl, PrivateCmapFlag), 0, NULL},
+            "false", offsetof(Togl, PrivateCmapFlag), 0, NULL},
 
     {TK_CONFIG_BOOLEAN, TCL_STUPID "-overlay", "overlay", "Overlay",
-            "false", Tk_Offset(Togl, OverlayFlag), 0, NULL},
+            "false", offsetof(Togl, OverlayFlag), 0, NULL},
 
     {TK_CONFIG_BOOLEAN, TCL_STUPID "-stereo", "stereo", "Stereo",
-            "false", Tk_Offset(Togl, StereoFlag), 0, NULL},
+            "false", offsetof(Togl, StereoFlag), 0, NULL},
 
 #ifdef __sgi
     {TK_CONFIG_BOOLEAN, TCL_STUPID "-oldstereo", "oldstereo", "OldStereo",
-            "false", Tk_Offset(Togl, OldStereoFlag), 0, NULL},
+            "false", offsetof(Togl, OldStereoFlag), 0, NULL},
 #endif
 
 #ifndef NO_TK_CURSOR
     {TK_CONFIG_ACTIVE_CURSOR, TCL_STUPID "-cursor", "cursor", "Cursor",
-            "", Tk_Offset(Togl, Cursor), TK_CONFIG_NULL_OK},
+            "", offsetof(Togl, Cursor), TK_CONFIG_NULL_OK},
 #endif
 
     {TK_CONFIG_INT, TCL_STUPID "-time", "time", "Time",
-            DEFAULT_TIME, Tk_Offset(Togl, TimerInterval), 0, NULL},
+            DEFAULT_TIME, offsetof(Togl, TimerInterval), 0, NULL},
 
     {TK_CONFIG_STRING, TCL_STUPID "-sharelist", "sharelist", "ShareList",
-            NULL, Tk_Offset(Togl, ShareList), 0, NULL},
+            NULL, offsetof(Togl, ShareList), 0, NULL},
 
     {TK_CONFIG_STRING, TCL_STUPID "-sharecontext", "sharecontext",
-            "ShareContext", NULL, Tk_Offset(Togl, ShareContext), 0, NULL},
+            "ShareContext", NULL, offsetof(Togl, ShareContext), 0, NULL},
 
     {TK_CONFIG_STRING, TCL_STUPID "-ident", "ident", "Ident",
-            DEFAULT_IDENT, Tk_Offset(Togl, Ident), 0, NULL},
+            DEFAULT_IDENT, offsetof(Togl, Ident), 0, NULL},
 
     {TK_CONFIG_BOOLEAN, TCL_STUPID "-indirect", "indirect", "Indirect",
-            "false", Tk_Offset(Togl, Indirect), 0, NULL},
+            "false", offsetof(Togl, Indirect), 0, NULL},
 
     {TK_CONFIG_INT, TCL_STUPID "-pixelformat", "pixelFormat", "PixelFormat",
-            "0", Tk_Offset(Togl, PixelFormat), 0, NULL},
+            "0", offsetof(Togl, PixelFormat), 0, NULL},
 
     {TK_CONFIG_END, NULL, NULL, NULL, NULL, 0, 0, NULL}
 };
@@ -1309,7 +1308,7 @@ Togl_Configure(Tcl_Interp *interp, Togl *togl,
 
 static int
 Togl_Widget(ClientData clientData, Tcl_Interp *interp, int argc,
-        CONST84 char *argv[])
+        const char *argv[])
 {
     Togl   *togl = (Togl *) clientData;
     int     result = TCL_OK;
@@ -1425,7 +1424,7 @@ Togl_Widget(ClientData clientData, Tcl_Interp *interp, int argc,
  */
 static int
 Togl_Cmd(ClientData clientData, Tcl_Interp *interp, int argc,
-        CONST84 char **argv)
+        const char **argv)
 {
     const char *name;
     Tk_Window mainwin = (Tk_Window) clientData;

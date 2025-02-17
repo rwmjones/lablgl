@@ -199,7 +199,7 @@ display_cb(Togl *togl)
 
 
 int
-setXrot_cb(Togl *togl, int argc, CONST84 char *argv[])
+setXrot_cb(Togl *togl, int argc, const char *argv[])
 {
     Tcl_Interp *interp = Togl_Interp(togl);
 
@@ -232,7 +232,7 @@ setXrot_cb(Togl *togl, int argc, CONST84 char *argv[])
 
 
 int
-setYrot_cb(Togl *togl, int argc, CONST84 char *argv[])
+setYrot_cb(Togl *togl, int argc, const char *argv[])
 {
     Tcl_Interp *interp = Togl_Interp(togl);
 
@@ -262,7 +262,7 @@ setYrot_cb(Togl *togl, int argc, CONST84 char *argv[])
 
 int
 getXrot_cb(ClientData clientData, Tcl_Interp *interp,
-        int argc, CONST84 char *argv[])
+        int argc, const char *argv[])
 {
     sprintf(interp->result, "%d", (int) xAngle);
     return TCL_OK;
@@ -271,7 +271,7 @@ getXrot_cb(ClientData clientData, Tcl_Interp *interp,
 
 int
 getYrot_cb(ClientData clientData, Tcl_Interp *interp,
-        int argc, CONST84 char *argv[])
+        int argc, const char *argv[])
 {
     sprintf(interp->result, "%d", (int) yAngle);
     return TCL_OK;
@@ -279,7 +279,7 @@ getYrot_cb(ClientData clientData, Tcl_Interp *interp,
 
 
 int
-scale_cb(Togl *togl, int argc, CONST84 char *argv[])
+scale_cb(Togl *togl, int argc, const char *argv[])
 {
     Tcl_Interp *interp = Togl_Interp(togl);
 

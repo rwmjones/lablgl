@@ -322,7 +322,7 @@ init(Togl *togl)
 }
 
 int
-position(Togl *togl, int argc, CONST84 char *argv[])
+position(Togl *togl, int argc, const char *argv[])
 {
     struct WHIRLYGIZMO *Wg;
     Tcl_Interp *interp = Togl_Interp(togl);
@@ -344,7 +344,7 @@ position(Togl *togl, int argc, CONST84 char *argv[])
 }
 
 int
-rotate(Togl *togl, int argc, CONST84 char *argv[])
+rotate(Togl *togl, int argc, const char *argv[])
 {
     struct WHIRLYGIZMO *Wg;
     Tcl_Interp *interp = Togl_Interp(togl);
